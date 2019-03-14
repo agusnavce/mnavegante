@@ -1,188 +1,179 @@
-import React from 'react';
-import {
-  Image,
-  Platform,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import { WebBrowser } from 'expo';
-
-import { MonoText } from '../components/StyledText';
+import React from "react";
+import { Text, View, Image, StyleSheet, ScrollView } from "react-native";
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
-    header: null,
+    header: null
   };
 
   render() {
     return (
-      <View style={styles.container}>
-        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-          <View style={styles.welcomeContainer}>
-            <Image
-              source={
-                __DEV__
-                  ? require('../../assets/images/robot-dev.png')
-                  : require('../../assets/images/robot-prod.png')
-              }
-              style={styles.welcomeImage}
-            />
+      <ScrollView style={styles.infoContainer}>
+        <View style={styles.parking}>
+          <View style={styles.header}>
+            <Text style={styles.title}>Aquí soñó Blanes Viale</Text>
           </View>
-
-          <View style={styles.getStartedContainer}>
-            {this._maybeRenderDevelopmentModeWarning()}
-
-            <Text style={styles.getStartedText}>Get started by opening</Text>
-
-            <View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
-              <MonoText style={styles.codeHighlightText}>screens/HomeScreen.js</MonoText>
-            </View>
-
-            <Text style={styles.getStartedText}>
-              Change this text and your app will automatically reload.
+          <View style={styles.info}>
+            <Text style={{ marginBottom: 2, fontSize: 16 }}>
+              En Aquí soñó Blanes Viale, Pablo Uribe revisa y reformula a través
+              del montaje más de un centenar de obras del acervo del Museo
+              Nacional de Artes Visuales, buscando intervenir y comentar los
+              mecanismos y los dispositivos que se ponen en juego en el museo:
+              el espacio arquitectónico, la curaduría, el acervo, la museografía
+              y la restauración.
+            </Text>
+            <Text style={{ marginBottom: 2, fontSize: 16 }}>
+              La exposición propicia un diálogo con la historia de la pintura
+              uruguaya, interpelando los límites entre la cita y la apropiación,
+              el original y la copia, la autoría y la representación. Uribe
+              modifica con toda libertad las pautas museográficas en la búsqueda
+              de una nueva convergencia entre las obras (propias y ajenas) y el
+              espacio que las contiene.
+            </Text>
+            <Text style={{ marginBottom: 2, fontSize: 16 }}>
+              Cada una de las cuarenta y seis obras que componen esta exposición
+              está referenciada con un número que encuentra su correspondiente
+              en la instalación Citas citables, ubicada al ingreso de la Sala 2.
             </Text>
           </View>
-
-          <View style={styles.helpContainer}>
-            <TouchableOpacity onPress={this._handleHelpPress} style={styles.helpLink}>
-              <Text style={styles.helpLinkText}>Help, it didn’t automatically reload!</Text>
-            </TouchableOpacity>
+          <View style={styles.parking}>
+            <View style={styles.header}>
+              <Text style={styles.title}>
+                Funcionamiento del recorrido de la exhibición
+              </Text>
+            </View>
+            <View style={styles.info}>
+              <Text style={{ marginBottom: 8 }} style={styles.text}>
+                Luego de entrar a la pantalla de exhibición el sistema comenzara
+                a reconocer en que punto del museo usted se encuentra. Acorde al
+                recorrido que usted realice se le iran mostrando las obras que
+                están en la zona cicundante. Oprimiendo el botón con los
+                auriculares podrá acceder a la información de la obra, contando
+                con un audio explicativo de la misma.
+              </Text>
+            </View>
           </View>
-        </ScrollView>
-
-        <View style={styles.tabBarInfoContainer}>
-          <Text style={styles.tabBarInfoText}>This is a tab bar. You can edit it in:</Text>
-
-          <View style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-            <MonoText style={styles.codeHighlightText}>navigation/MainTabNavigator.js</MonoText>
+          <View style={styles.parking}>
+            <View style={styles.header}>
+              <Text style={styles.title}>Recorrido a ciegas </Text>
+            </View>
+            <View style={styles.info}>
+              <Text style={styles.text}>
+                Luego de oprimir el botón de recorrido a ciegas, se comienza a
+                reproducir un audio introductorio sobre la muestra. Una vez
+                finalizado este primer audio, se comenzará a localizar al
+                usuario. A medida que se aproxime a alguna de ocho obras
+                distribuidas en el MNAV, la app reproducirá el audio relevante a
+                esta obra.
+              </Text>
+            </View>
           </View>
         </View>
-      </View>
+
+        <View style={styles.admissions}>
+          <View style={styles.header}>
+            <Text style={styles.title}>Compatibilidad de dispositivos</Text>
+          </View>
+          <View style={styles.info}>
+            <Text style={styles.text}>
+              La aplicación se encuentra solo disponible para dispositivos
+              Android. Para tablets o móviles que no cuenten con Wi-Fi de doble
+              banda, la localización se verá negativamente afectada.
+            </Text>
+          </View>
+        </View>
+
+        <View style={styles.admissions}>
+          <View style={styles.header}>
+            <Text style={styles.title}>Entrada</Text>
+          </View>
+          <View style={styles.info}>
+            <Text style={styles.text}>
+              La entrada es completamente gratuita
+            </Text>
+          </View>
+        </View>
+
+        <View style={styles.hours}>
+          <View style={styles.header}>
+            <Text style={styles.title}>Horas de Apertura</Text>
+          </View>
+          <View style={styles.info}>
+            <Text style={styles.text}>
+              Martes a domingo de 13:00 a 20:00 horas
+            </Text>
+          </View>
+        </View>
+
+        <View style={styles.map}>
+          <Image
+            style={styles.mapImg}
+            source={{
+              uri: "https://s3-sa-east-1.amazonaws.com/posifi-app/mapa.jpg"
+            }}
+          />
+        </View>
+      </ScrollView>
     );
   }
-
-  _maybeRenderDevelopmentModeWarning() {
-    if (__DEV__) {
-      const learnMoreButton = (
-        <Text onPress={this._handleLearnMorePress} style={styles.helpLinkText}>
-          Learn more
-        </Text>
-      );
-
-      return (
-        <Text style={styles.developmentModeText}>
-          Development mode is enabled, your app will be slower but you can use useful development
-          tools. {learnMoreButton}
-        </Text>
-      );
-    } else {
-      return (
-        <Text style={styles.developmentModeText}>
-          You are not in development mode, your app will run at full speed.
-        </Text>
-      );
-    }
-  }
-
-  _handleLearnMorePress = () => {
-    WebBrowser.openBrowserAsync('https://docs.expo.io/versions/latest/guides/development-mode');
-  };
-
-  _handleHelpPress = () => {
-    WebBrowser.openBrowserAsync(
-      'https://docs.expo.io/versions/latest/guides/up-and-running.html#can-t-see-your-changes'
-    );
-  };
 }
 
 const styles = StyleSheet.create({
-  container: {
+  infoContainer: {
     flex: 1,
-    backgroundColor: '#fff',
+    display: "flex"
   },
-  developmentModeText: {
-    marginBottom: 20,
-    color: 'rgba(0,0,0,0.4)',
-    fontSize: 14,
-    lineHeight: 19,
-    textAlign: 'center',
+  admissions: {
+    flex: 1,
+    display: "flex"
   },
-  contentContainer: {
-    paddingTop: 30,
+  hours: {
+    flex: 1,
+    display: "flex"
   },
-  welcomeContainer: {
-    alignItems: 'center',
-    marginTop: 10,
-    marginBottom: 20,
+  parking: {
+    flex: 1,
+    display: "flex"
   },
-  welcomeImage: {
-    width: 100,
-    height: 80,
-    resizeMode: 'contain',
-    marginTop: 3,
-    marginLeft: -10,
+  map: {
+    flex: 1,
+    display: "flex",
+    borderTopWidth: 3,
+    borderTopColor: "#009FB7",
+    height: 300
   },
-  getStartedContainer: {
-    alignItems: 'center',
-    marginHorizontal: 50,
+  text: {
+    fontSize: 16
   },
-  homeScreenFilename: {
-    marginVertical: 7,
+  mapImg: {
+    flex: 1,
+    height: null,
+    width: null
   },
-  codeHighlightText: {
-    color: 'rgba(96,100,109, 0.8)',
+  header: {
+    flex: 0.3,
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: 3,
+    borderBottomWidth: 2,
+    borderColor: "#1d1d1d"
   },
-  codeHighlightContainer: {
-    backgroundColor: 'rgba(0,0,0,0.05)',
-    borderRadius: 3,
-    paddingHorizontal: 4,
+  info: {
+    flex: 0.7,
+    padding: 10,
+    display: "flex"
   },
-  getStartedText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    lineHeight: 24,
-    textAlign: 'center',
+  title: {
+    fontSize: 24,
+    marginLeft: 5,
+    color: "#1d1d1d",
+    textShadowOffset: { width: 0.5, height: 0.5 },
+    textShadowColor: "black",
+    textShadowRadius: 1
   },
-  tabBarInfoContainer: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    ...Platform.select({
-      ios: {
-        shadowColor: 'black',
-        shadowOffset: { height: -3 },
-        shadowOpacity: 0.1,
-        shadowRadius: 3,
-      },
-      android: {
-        elevation: 20,
-      },
-    }),
-    alignItems: 'center',
-    backgroundColor: '#fbfbfb',
-    paddingVertical: 20,
-  },
-  tabBarInfoText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    textAlign: 'center',
-  },
-  navigationFilename: {
-    marginTop: 5,
-  },
-  helpContainer: {
-    marginTop: 15,
-    alignItems: 'center',
-  },
-  helpLink: {
-    paddingVertical: 15,
-  },
-  helpLinkText: {
-    fontSize: 14,
-    color: '#2e78b7',
-  },
+  icon: {
+    marginRight: 15
+  }
 });
