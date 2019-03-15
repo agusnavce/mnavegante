@@ -1,179 +1,72 @@
 import React from "react";
-import { Text, View, Image, StyleSheet, ScrollView } from "react-native";
+import { View, StyleSheet, ScrollView } from "react-native";
+
+import InformationItem from "../components/informationItem";
+
+import { LIGHT_GRAY } from "../styles";
+
+items = [
+  {
+    description: "una descripcion de prueba",
+    title: "Un titulo",
+    icon:
+      "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAATYAAACjCAMAAAA3vsLfAAAAe1BMVEX///8AAAC5ublTU1PV1dXj4+P19fXNzc36+vrv7+91dXWLi4vGxsYlJSUXFxeysrIfHx85OTmWlpbo6OhYWFiFhYVBQUEzMzPb29stLS2np6eioqLCwsJubm5fX18bGxtycnKHh4dMTEwODg5mZmZGRkZ9fX2ampqjo6O1OTTvAAAGqElEQVR4nO2d2XbqMAxFCQQI89RSZmgp0P//wsvUchPsSFbiyDLZr0z2WSS2pCOnUikpeVGaVQ0h98gcpvERaPlqcI/OWTZ61YJgwz06V2mkqRYE5d9NzSpdthn3+BxlnC5blXt8jvKWLtuYe3yOkq5asOYen5u0ANlG3AN0kyYgW8A9QDdZQLJNuEfoJO+QbE3uETpJaoxwYcE9QifpQbK9c4+Qi/p40dK+CKkWvGk/OlmcPE6RdC6T/9G8OAFl2+q+97qYfFsaNDeT+W32mvmFoGy6YH59e/UQ2Rs7H49t2bCuen0Ay6YM5uvD35c/PMyRxFRRReUnWLYV8L09/Y1TKMu4AMfnd7Rh2ZbPn1rH3rD3TLdOUoHp0wQPsGzt5GfqT5sW5fUvlaNCg+SeH9y2nW/6iY+oboce6aZSLQhOsfd0YdWCfXxztlO+yZsk8KdGhc3fjqE+Hmrek2B++ovn63PNezzRTZ/rvu9Eqojb2oNa9/Yh/Tu80C21QjA436AQN7U484HuuvdHt2Xa/IJgvTUV7cJwlP66+HUBzD3aQfj+DRExWaEvOs4CywPWmAuO6+tsqp0XXO7Jk4n6jLIFHe7pUwGq7LYRan5I2ZAWg8xlYcotmyo95z6kjWyeyLxKU+OfIpAZKwDmSOs8JTWFwLfZvTDnnj4ZIIy3i8xL9Moanp0tZK4Hd1IaDeyiKI0JAnJI2mLKPfGMMC0LwvNtlcoPh2pd7llnh2FZEJv8+I/IuMSSlS/uKedC4clKmZmPJwouw3jjjP4uUrUTPB4hRPviVNMbfOUxK0427qnmCcKXmxc+OcZrhnOvdRbdZhg2u4uOaR3Ho4vU6Brtf4ax0nAUfhoVDgUnjBIYrKRTZVzUNSjn7Iqdmz3w+92tNpjs4gs64sP4O09+Zx2psST6W3xpDsfu2oDtPTYH1StmVrZBTncOXlwtnVs3gR97ELWhO8kU4ayKcCuD7IT4mWjSXeCqzCOUHy0CzKc39jOx5rZWOOhsUJO8MkQmexpII/6wdlx0J4LUa9RXy/bBNHZH71HNknej71N15n76rYHoN1MxwP8ExQ38dVw6HTsQ899GcSTRbOhwfQHREqrE6IAPuDlcjbvVLOIfwfDEBfC8EDXu9tKb5ofuGAaRxEq/u9ZxmmzGPjTauuObbMaVJppBwjPZ+ua/Q+p38Ey2nfnv4KJcv2Uz2Or+QmqA80w2wv6dZI/wTDZCyEjyoPsl25DyQ8g8iMeyfVB+iGIJ9ks2ksuW0s7ll2wkD9/Xy8tW/tvKexuNciUlUe7bSJRRAokyJiVRZkBIlPk2EmV2lwRNtp3pz5S1hCuvXrkidrsUUyd110KOOc1URSFVecVZx66A9tfGKcID4rQ1tb58rxEarAyeu0E7f3B/dN/rdrO42enBMI2r+of2clV3X7MHrdlg/I3MjOXtpjwz2owHodwehRbqb5endze4GFBtT8s6uA1Djk5xqWdCxUF2RZZ9CQmw96OcumDkHqUVp+CeK4f3tUaUHX40DA6eyd5P6seCcKHsXqZhGkdm6JV31xBuToEnM3j0Z0M81jA3vDmqp4J49GiOuN+ZhqXQE1H9OIasUuid7YInRwwUftqzHzEpxcOXDR9ub8T6Qhbcre2hoVazMuFwzy0OpvOKRR+NXeF7RIfsYIHtURN9ScWqJIxP0RG8LHA+HkzwsoAsmVhC5oOHqD60/JCZHWe9RC+suRUgwf5UtS23AiRW3LKNuBUgwf2cKxP7l0swPUD4F3ddpwCsj6MTHCdwPjRScFTa4HserugKFtXWnRlCA5xLMOkmdBF9APg/RpRG5GALmHE88GqluvnalcrAOODvDQCfvRclv5Qy6e0O1DXq1TrcEt4z/WrjhWp63Xp/e4TJCfmXG47/PhPpxP7kmWX+qO9vcUtViGmeiXsG1aVE8SeKP1DlkJKL3QFWLXn4haqY6JFqCt36s+RbEEnNQ/Izk6dr25sr9EaiF2bzHDAibEm75+9N7ET8eaTancb/B+yo9lWI9JxKlFiaRXhsoCJ63LyUliCEL1qpyn/rtLvnX2fh7l5+UxuCIlg2tQOrcbc09eS3p6k56q60K3DDhk6X605Ebl0UJDz96P8SsMFX+9HJYiw4vZYNsIHS6XZ3NsAu+A33CJ0EbHw0PC/kRQAzmuJzj3aAZBNdHrAHdH6ATCuMdaC2U+7xOco4XTXB/kirABYlj8OATADBvFR3pG0Ai1K5ImhIjUrLGEFHI6Wr7cOH/jNbhFUN5Va35GX5B/w2YxTLer6bAAAAAElFTkSuQmCC"
+  }
+];
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
     header: null
   };
 
+  renderItems() {
+    items.forEach((item, index) => (
+      <InformationItem
+        key={index}
+        information={item}
+        border={index !== items.length - 1}
+      />
+    ));
+  }
+
   render() {
     return (
-      <ScrollView style={styles.infoContainer}>
-        <View style={styles.parking}>
-          <View style={styles.header}>
-            <Text style={styles.title}>Aquí soñó Blanes Viale</Text>
-          </View>
-          <View style={styles.info}>
-            <Text style={{ marginBottom: 2, fontSize: 16 }}>
-              En Aquí soñó Blanes Viale, Pablo Uribe revisa y reformula a través
-              del montaje más de un centenar de obras del acervo del Museo
-              Nacional de Artes Visuales, buscando intervenir y comentar los
-              mecanismos y los dispositivos que se ponen en juego en el museo:
-              el espacio arquitectónico, la curaduría, el acervo, la museografía
-              y la restauración.
-            </Text>
-            <Text style={{ marginBottom: 2, fontSize: 16 }}>
-              La exposición propicia un diálogo con la historia de la pintura
-              uruguaya, interpelando los límites entre la cita y la apropiación,
-              el original y la copia, la autoría y la representación. Uribe
-              modifica con toda libertad las pautas museográficas en la búsqueda
-              de una nueva convergencia entre las obras (propias y ajenas) y el
-              espacio que las contiene.
-            </Text>
-            <Text style={{ marginBottom: 2, fontSize: 16 }}>
-              Cada una de las cuarenta y seis obras que componen esta exposición
-              está referenciada con un número que encuentra su correspondiente
-              en la instalación Citas citables, ubicada al ingreso de la Sala 2.
-            </Text>
-          </View>
-          <View style={styles.parking}>
-            <View style={styles.header}>
-              <Text style={styles.title}>
-                Funcionamiento del recorrido de la exhibición
-              </Text>
-            </View>
-            <View style={styles.info}>
-              <Text style={{ marginBottom: 8 }} style={styles.text}>
-                Luego de entrar a la pantalla de exhibición el sistema comenzara
-                a reconocer en que punto del museo usted se encuentra. Acorde al
-                recorrido que usted realice se le iran mostrando las obras que
-                están en la zona cicundante. Oprimiendo el botón con los
-                auriculares podrá acceder a la información de la obra, contando
-                con un audio explicativo de la misma.
-              </Text>
-            </View>
-          </View>
-          <View style={styles.parking}>
-            <View style={styles.header}>
-              <Text style={styles.title}>Recorrido a ciegas </Text>
-            </View>
-            <View style={styles.info}>
-              <Text style={styles.text}>
-                Luego de oprimir el botón de recorrido a ciegas, se comienza a
-                reproducir un audio introductorio sobre la muestra. Una vez
-                finalizado este primer audio, se comenzará a localizar al
-                usuario. A medida que se aproxime a alguna de ocho obras
-                distribuidas en el MNAV, la app reproducirá el audio relevante a
-                esta obra.
-              </Text>
-            </View>
-          </View>
+      <View style={{ flex: 1, backgroundColor: LIGHT_GRAY }}>
+        <View style={[styles.container]}>
+          <ScrollView
+            automaticallyAdjustContentInsets={false}
+            contentContainerStyle={{ paddingBottom: 10 }}
+          >
+            <InformationItem
+              information={{
+                description: "una descripcion de prueba",
+                title: "Un titulo",
+                icon:
+                  "data:image/png;base64,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"
+              }}
+              border={true}
+            />
+            <InformationItem
+              information={{
+                description: "una descripcion de prueba",
+                title: "Un titulo",
+                icon:
+                  "data:image/png;base64,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"
+              }}
+              border={false}
+            />
+          </ScrollView>
         </View>
-
-        <View style={styles.admissions}>
-          <View style={styles.header}>
-            <Text style={styles.title}>Compatibilidad de dispositivos</Text>
-          </View>
-          <View style={styles.info}>
-            <Text style={styles.text}>
-              La aplicación se encuentra solo disponible para dispositivos
-              Android. Para tablets o móviles que no cuenten con Wi-Fi de doble
-              banda, la localización se verá negativamente afectada.
-            </Text>
-          </View>
-        </View>
-
-        <View style={styles.admissions}>
-          <View style={styles.header}>
-            <Text style={styles.title}>Entrada</Text>
-          </View>
-          <View style={styles.info}>
-            <Text style={styles.text}>
-              La entrada es completamente gratuita
-            </Text>
-          </View>
-        </View>
-
-        <View style={styles.hours}>
-          <View style={styles.header}>
-            <Text style={styles.title}>Horas de Apertura</Text>
-          </View>
-          <View style={styles.info}>
-            <Text style={styles.text}>
-              Martes a domingo de 13:00 a 20:00 horas
-            </Text>
-          </View>
-        </View>
-
-        <View style={styles.map}>
-          <Image
-            style={styles.mapImg}
-            source={{
-              uri: "https://s3-sa-east-1.amazonaws.com/posifi-app/mapa.jpg"
-            }}
-          />
-        </View>
-      </ScrollView>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  infoContainer: {
+  container: {
+    alignItems: "stretch",
     flex: 1,
-    display: "flex"
-  },
-  admissions: {
-    flex: 1,
-    display: "flex"
-  },
-  hours: {
-    flex: 1,
-    display: "flex"
-  },
-  parking: {
-    flex: 1,
-    display: "flex"
-  },
-  map: {
-    flex: 1,
-    display: "flex",
-    borderTopWidth: 3,
-    borderTopColor: "#009FB7",
-    height: 300
-  },
-  text: {
-    fontSize: 16
-  },
-  mapImg: {
-    flex: 1,
-    height: null,
-    width: null
-  },
-  header: {
-    flex: 0.3,
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: 3,
-    borderBottomWidth: 2,
-    borderColor: "#1d1d1d"
-  },
-  info: {
-    flex: 0.7,
-    padding: 10,
-    display: "flex"
-  },
-  title: {
-    fontSize: 24,
-    marginLeft: 5,
-    color: "#1d1d1d",
-    textShadowOffset: { width: 0.5, height: 0.5 },
-    textShadowColor: "black",
-    textShadowRadius: 1
-  },
-  icon: {
-    marginRight: 15
+    backgroundColor: "#ffffff",
+    marginTop: 24
   }
 });
