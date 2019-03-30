@@ -1,16 +1,13 @@
 import React from "react";
 import { View, StyleSheet, Text, Image } from "react-native";
 import { OFF_BLACK } from "../styles";
+import { Ionicons } from "@expo/vector-icons";
 
 const InformationItem = ({ information, border }) => {
   var { description, title, icon } = information;
   return (
     <View style={[styles.container, border ? styles.borderStyle : {}]}>
-      <Image
-        style={styles.image}
-        resizeMode={"contain"}
-        source={{ uri: icon }}
-      />
+      <Ionicons name="md-add-circle" size={32}  />
       <View style={styles.textContainer}>
         <Text
           style={[

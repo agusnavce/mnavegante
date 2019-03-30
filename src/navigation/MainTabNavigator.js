@@ -1,60 +1,66 @@
-import React from 'react';
-import { Platform } from 'react-native';
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import React from "react";
+import { Platform } from "react-native";
+import {
+  createStackNavigator,
+  createBottomTabNavigator
+} from "react-navigation";
 
-import TabBarIcon from '../components/TabBarIcon';
-import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+import TabBarIcon from "../components/TabBarIcon";
+import InformationScreen from "../screens/InformationScreen";
+import NearMeScreen from "../screens/NearMeScreen";
+import SearchScreen from "../screens/SearchScreen";
+import BlindAudioGuideScreen from "../screens/BlindAudioGuideScreen";
 
-const HomeStack = createStackNavigator({
-  Home: HomeScreen,
+const InformationStack = createStackNavigator({
+  Information: InformationScreen
 });
 
-HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
+InformationStack.navigationOptions = {
+  tabBarLabel: "Información",
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
       name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
+        Platform.OS === "ios"
+          ? `ios-information-circle${focused ? "" : "-outline"}`
+          : "md-information-circle"
       }
     />
-  ),
+  )
 };
 
-const LinksStack = createStackNavigator({
-  Links: LinksScreen,
+const NearMeStack = createStackNavigator({
+  NearMe: NearMeScreen
 });
 
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'}
-    />
-  ),
+NearMeStack.navigationOptions = {
+  tabBarLabel: "Cerca de mi",
+  tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name={"ios-radio"} />
 };
 
-const SettingsStack = createStackNavigator({
-  Settings: SettingsScreen,
+const BlindAudioGuideStack = createStackNavigator({
+  BlindAudioGuide: BlindAudioGuideScreen
 });
 
-SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
-    />
-  ),
+BlindAudioGuideStack.navigationOptions = {
+  tabBarLabel: "Audioguia",
+  tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name={"md-mic"} />
 };
+
+
+const SearchStack = createStackNavigator({
+  Search: SearchScreen
+});
+
+SearchStack.navigationOptions = {
+  tabBarLabel: "Buscar",
+  tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name={"md-search"} />
+};
+
 
 export default createBottomTabNavigator({
-  HomeStack,
-  LinksStack,
-  SettingsStack,
+  NearMeStack,
+  BlindAudioGuideStack,
+  SearchStack,
+  InformationStack
 });

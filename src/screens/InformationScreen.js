@@ -1,7 +1,8 @@
 import React from "react";
 import { View, StyleSheet, ScrollView } from "react-native";
 
-import InformationItem from "../components/informationItem";
+import InformationItem from "../components/InformationItem";
+import Cards from "../components/Cards";
 
 import { LIGHT_GRAY } from "../styles";
 
@@ -16,7 +17,7 @@ items = [
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
-    header: null
+    title: "Información"
   };
 
   renderItems() {
@@ -66,7 +67,6 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "stretch",
     flex: 1,
-    backgroundColor: "#ffffff",
-    marginTop: 24
+    backgroundColor: "#ffffff"
   }
 });

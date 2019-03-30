@@ -7,7 +7,7 @@ import {
   Text,
   TouchableOpacity
 } from "react-native";
-import { OFF_BLACK, ACTION, LIGHT_BLUE, LIGHT_GRAY } from "../styles";
+import { OFF_BLACK, ACTION, LIGHT_GRAY } from "../styles";
 
 export default class WelcomeScreen extends React.Component {
   static navigationOptions = {
