@@ -1,7 +1,7 @@
 import React from "react";
-import { View } from "react-native";
+import { View, Button } from "react-native";
 
-import Cards from "../components/Cards";
+import Cards from "../components/BigCards";
 export default class NearMeScreen extends React.Component {
   static navigationOptions = {
     title: "Cerca de mi"
@@ -10,6 +10,7 @@ export default class NearMeScreen extends React.Component {
   render() {
     return (
       <View>
+        <Button title={"Holas"} />
         <Cards />
       </View>
     );

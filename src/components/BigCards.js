@@ -3,7 +3,7 @@ import React from "react";
 import Carousel from "react-native-snap-carousel";
 import { Dimensions, StyleSheet } from "react-native";
 
-import CardItem from "./CardItem";
+import CardItem from "./BigCardItem";
 
 ENTRIES2 = [
   {
@@ -42,7 +42,7 @@ export default function Cards() {
       renderItem={renderItem}
       sliderWidth={sliderWidth}
       itemWidth={itemWidth}
-      sliderHeight={sliderWidth + 250}
+      // sliderHeight={sliderWidth + 250}
       itemHeight={300}
       inactiveSlideScale={0.95}
       inactiveSlideOpacity={1}
@@ -54,7 +54,7 @@ export default function Cards() {
         friction: 4,
         tension: 40
       }}
-      vertical={true}
+      // vertical={true}
       windowSize={1}
     />
   );

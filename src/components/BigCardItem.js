@@ -17,14 +17,14 @@ function wp(percentage) {
   return Math.round(value);
 }
 
-const slideHeight = viewportHeight * 0.36;
+const slideHeight = viewportHeight * 0.7;
 const slideWidth = wp(75);
 const itemHorizontalMargin = wp(2);
 
 export const sliderWidth = viewportWidth;
 export const itemWidth = slideWidth + itemHorizontalMargin * 2;
 
-var CardItem = ({ data: { illustration, title, subtitle } }) => {
+var BigCardItem = ({ data: { illustration, title, subtitle } }) => {
   const uppercaseTitle = title ? (
     <Text style={styles.title} numberOfLines={2}>
       {title.toUpperCase()}
@@ -69,7 +69,7 @@ var CardItem = ({ data: { illustration, title, subtitle } }) => {
   );
 };
 
-export default CardItem;
+export default BigCardItem;
 
 const entryBorderRadius = 8;
 export const colors = {
@@ -98,24 +98,17 @@ var styles = StyleSheet.create({
     shadowRadius: 10,
     borderRadius: entryBorderRadius
   },
-  titleContainer:{
-    width: '80%',
+  titleContainer: {
+    width: "80%",
     marginLeft: 10
   },
-  imageContainer: {
-    flex: 1,
-    marginBottom: -1, // Prevent a random Android rendering issue
-    backgroundColor: "white",
-    borderTopLeftRadius: entryBorderRadius,
-    borderTopRightRadius: entryBorderRadius
-  },
   image: {
-    // ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFillObject,
     resizeMode: "cover",
     borderRadius: 0,
-    borderRadius: entryBorderRadius,
-    width: 60,
-    height: 60
+    borderRadius: entryBorderRadius
+    // width: 60,
+    // height: 60
   },
   // image's border radius is buggy on iOS; let's hack it!
   radiusMask: {
@@ -131,11 +124,11 @@ var styles = StyleSheet.create({
     paddingTop: 20 - entryBorderRadius,
     paddingBottom: 20,
     paddingHorizontal: 16,
-    backgroundColor: "white",
-    // borderBottomLeftRadius: entryBorderRadius,
+    backgroundColor: "black",
     borderRadius: entryBorderRadius,
     display: "flex",
     flexDirection: "row",
+    height: 400
   },
   title: {
     color: colors.black,

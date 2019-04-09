@@ -1,8 +1,14 @@
 import React from "react";
-import { View, StyleSheet, ScrollView } from "react-native";
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  Text,
+  Image,
+  Button
+} from "react-native";
 
-import InformationItem from "../components/InformationItem";
-import Cards from "../components/Cards";
+import Panel from "../components/Panel";
 
 import { LIGHT_GRAY } from "../styles";
 
@@ -20,42 +26,117 @@ export default class HomeScreen extends React.Component {
     title: "Información"
   };
 
-  renderItems() {
-    items.forEach((item, index) => (
-      <InformationItem
-        key={index}
-        information={item}
-        border={index !== items.length - 1}
-      />
-    ));
-  }
-
   render() {
     return (
       <View style={{ flex: 1, backgroundColor: LIGHT_GRAY }}>
         <View style={[styles.container]}>
+          <View style={{ flex: 1, alignItems: "center" }}>
+            <Image
+              style={styles.image}
+              source={{
+                uri:
+                  "https://media-cdn.tripadvisor.com/media/photo-s/07/8c/6d/d7/museu-nacional-de-artes.jpg"
+              }}
+            />
+          </View>
           <ScrollView
             automaticallyAdjustContentInsets={false}
             contentContainerStyle={{ paddingBottom: 10 }}
           >
-            <InformationItem
-              information={{
-                description: "una descripcion de prueba",
-                title: "Un titulo",
-                icon:
-                  "data:image/png;base64,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"
-              }}
-              border={true}
-            />
-            <InformationItem
-              information={{
-                description: "una descripcion de prueba",
-                title: "Un titulo",
-                icon:
-                  "data:image/png;base64,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"
-              }}
-              border={false}
-            />
+            <Panel title={"Sobre la muestra"}>
+              <View style={styles.panel}>
+                <Text>
+                  El MNAV en el marco del programa Picasso Mundo, iniciativa
+                  surgida desde el Musée national Picasso-Paris, a través de
+                  Laurent Le Bon, presidente de dicha institución, presentará la
+                  exposición Picasso en Uruguay con la curaduría a cargo de
+                  Emmanuel Guigon, director del Museu Picasso de Barcelona y el
+                  auspicio de la Embajada de Francia en nuestro país.
+                </Text>
+                <Text>
+                  Las cuarenta y cinco obras de Pablo Picasso a ser exhibidas
+                  pertenecen en su mayor parte a la colección del Musée national
+                  Picasso-Paris y las demás al Museu Picasso Barcelona
+                </Text>
+                <Text>
+                  "Uruguay resuena en la obra de Pablo Picasso a través de la
+                  figura de Joaquín Torres García, pintor uruguayo radicado en
+                  Barcelona a partir de 1882 y que frecuentó los mismos lugares
+                  y los mismos círculos artísticos que Picasso", explicó Laurent
+                  Le Bon, presidente del Musée National Picasso-Paris.
+                </Text>
+                <Text>
+                  Enrique Aguerre, director del MNAV dijo que esta exposición
+                  "será la primera muestra de pintura del maestro en el país y
+                  seguramente se convierta en un hito para nuestras artes
+                  visuales". En su opinión compartir patrimonio es una de las
+                  formas de "democratizar el arte" y celebró el desembarco de
+                  sus obras en suelo uruguayo.
+                </Text>
+              </View>
+            </Panel>
+
+            <Panel title={"Horarios y fechas"}>
+              <View style={styles.panel}>
+                <Text>Abierto siete dias a la semana</Text>
+                <Text>Martes a Domingo: 10am - 8pm </Text>
+                <Text>Fechas de la exposición</Text>
+                <Text>Del 30 de Marzo al 30 de Junio</Text>
+              </View>
+            </Panel>
+
+            <Panel title={"Admisión"}>
+              <View style={styles.panel}>
+                <Text>Precios de las entradas:</Text>
+                <View style={styles.fee}>
+                  <Text>General</Text>
+                  <Text>$250</Text>
+                </View>
+                <View style={styles.fee}>
+                  <Text>Jubilados y mayores de 60</Text>
+                  <Text>$150</Text>
+                </View>
+                <View style={styles.fee}>
+                  <Text>Jovenes de 12 a 18 años</Text>
+                  <Text>$150</Text>
+                </View>
+                <View style={styles.fee}>
+                  <Text>Docentes de primaria, secundaria y técnica</Text>
+                  <Text>$150</Text>
+                </View>
+                <View style={styles.fee}>
+                  <Text>Menores de 12 y personas con discapacidad</Text>
+                  <Text>Gratis</Text>
+                </View>
+                <Text>
+                  Los días martes el ingreso a la exposición Picasso en Uruguay
+                  será gratuito para público general, realizándose la reserva
+                  correspondiente de día y hora a través de Tickantel. El
+                  ingreso al Museo Nacional de Artes Visuales, donde se
+                  exhibirán las exposiciones Pedro Figari: Nostalgias africanas
+                  y Colección del mnav, continuará siendo libre y gratuito. Las
+                  entradas se compran a través de Tickantel y Red Pagos.
+                </Text>
+                <View style={styles.buttons}>
+                  <Button title={"Tickantel"} />
+                  <Button title={"Red Pagos"} />
+                </View>
+              </View>
+            </Panel>
+
+            <Panel title={"Dirección"}>
+              <View style={styles.panel}>
+                <Image
+                  style={styles.mapImg}
+                  source={{
+                    uri:
+                      "https://s3-sa-east-1.amazonaws.com/posifi-app/mapa.jpg"
+                  }}
+                />
+                <Text>Tomás Giribaldi 2283 esq. Julio Herrera y Reissig</Text>
+                <Text> Parque Rodó - Montevideo - Uruguay</Text>
+              </View>
+            </Panel>
           </ScrollView>
         </View>
       </View>
@@ -64,9 +145,33 @@ export default class HomeScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  panel: {
+    backgroundColor: "white",
+    width: "100%"
+  },
   container: {
     alignItems: "stretch",
     flex: 1,
     backgroundColor: "#ffffff"
+  },
+  image: {
+    flex: 1,
+    width: "94%",
+    borderRadius: 8
+  },
+  mapImg: {
+    flex: 1,
+    width: 400,
+    height: 200
+  },
+  fee: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between"
+  },
+  buttons: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "flex-end"
   }
 });

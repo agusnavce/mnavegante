@@ -1,7 +1,7 @@
 import React from "react";
 import { View } from "react-native";
 import Cards from "../components/Cards";
-
+import SearchBar from "../components/SearchBar";
 export default class SearchScreen extends React.Component {
   static navigationOptions = {
     title: "Buscar"
@@ -9,7 +9,8 @@ export default class SearchScreen extends React.Component {
 
   render() {
     return (
-      <View>
+      <View style={{ backgroundColor: "#DCDCDC" }}>
+        <SearchBar />
         <Cards />
       </View>
     );
