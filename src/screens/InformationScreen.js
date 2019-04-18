@@ -5,9 +5,9 @@ import {
   ScrollView,
   Text,
   Image,
-  Button
+  Button,
+  Dimensions
 } from "react-native";
-
 
 import Panel from "../components/Panel";
 
@@ -24,13 +24,17 @@ export default class HomeScreen extends React.Component {
   static navigationOptions = {
     header: null
   };
+  state = {
+    width: Dimensions.get("window").width,
+    height: Dimensions.get("window").height
+  };
 
   render() {
     return (
-      <View style={{ flex: 1, marginTop: 28 }}>
+      <View style={{ flex: 1, marginTop: 26 }}>
         <View style={{ marginRight: 2 }}>
-          <Text>Museo Nacional</Text>
-          <Text>de Artes Visuales</Text>
+          <Text style={styles.firstTitle}>Museo Nacional</Text>
+          <Text style={styles.secondTitle}>de Artes Visuales</Text>
         </View>
         <View style={{ flex: 1, alignItems: "center" }}>
           <Image
@@ -44,12 +48,13 @@ export default class HomeScreen extends React.Component {
 
         <View style={[styles.container]}>
           <ScrollView
+            backgroundColor={"transparent"}
             automaticallyAdjustContentInsets={false}
-            contentContainerStyle={{ paddingBottom: 10 }}
+            contentContainerStyle={{ paddingBottom: 10, marginBottom: 26 }}
           >
             <Panel title={"Sobre la muestra"}>
               <View style={styles.panel}>
-                <Text>
+                <Text style={{ marginLeft: 10 }}>
                   El MNAV en el marco del programa Picasso Mundo, iniciativa
                   surgida desde el Musée national Picasso-Paris, a través de
                   Laurent Le Bon, presidente de dicha institución, presentará la
@@ -57,19 +62,19 @@ export default class HomeScreen extends React.Component {
                   Emmanuel Guigon, director del Museu Picasso de Barcelona y el
                   auspicio de la Embajada de Francia en nuestro país.
                 </Text>
-                <Text>
+                <Text style={{ marginLeft: 10 }}>
                   Las cuarenta y cinco obras de Pablo Picasso a ser exhibidas
                   pertenecen en su mayor parte a la colección del Musée national
                   Picasso-Paris y las demás al Museu Picasso Barcelona
                 </Text>
-                <Text>
+                <Text style={{ marginLeft: 10 }}>
                   "Uruguay resuena en la obra de Pablo Picasso a través de la
                   figura de Joaquín Torres García, pintor uruguayo radicado en
                   Barcelona a partir de 1882 y que frecuentó los mismos lugares
                   y los mismos círculos artísticos que Picasso", explicó Laurent
                   Le Bon, presidente del Musée National Picasso-Paris.
                 </Text>
-                <Text>
+                <Text style={{ marginLeft: 10 }}>
                   Enrique Aguerre, director del MNAV dijo que esta exposición
                   "será la primera muestra de pintura del maestro en el país y
                   seguramente se convierta en un hito para nuestras artes
@@ -82,44 +87,60 @@ export default class HomeScreen extends React.Component {
 
             <Panel title={"Horarios y fechas"}>
               <View style={styles.panel}>
-                <Text>Abierto siete dias a la semana</Text>
-                <Text>Martes a Domingo: 10am - 8pm </Text>
-                <Text>Fechas de la exposición</Text>
-                <Text>Del 30 de Marzo al 30 de Junio</Text>
+                <Text style={{ marginLeft: 10, fontWeight: "bold" }}>
+                  Abierto siete dias a la semana:
+                </Text>
+                <Text style={{ marginLeft: 10 }}>
+                  Martes a Domingo: 10am - 8pm{" "}
+                </Text>
+                <Text style={{ marginLeft: 10, fontWeight: "bold" }}>
+                  Fechas de la exposición:
+                </Text>
+                <Text style={{ marginLeft: 10 }}>
+                  Del 30 de Marzo al 30 de Junio
+                </Text>
               </View>
             </Panel>
 
             <Panel title={"Admisión"}>
               <View style={styles.panel}>
-                <Text>Precios de las entradas:</Text>
+                <Text style={{ marginLeft: 10 }}>Precios de las entradas:</Text>
                 <View style={styles.fee}>
-                  <Text>General</Text>
-                  <Text>$250</Text>
+                  <Text style={{ marginLeft: 10 }}>General</Text>
+                  <Text style={{ marginLeft: 10 }}>$250</Text>
                 </View>
                 <View style={styles.fee}>
-                  <Text>Jubilados y mayores de 60</Text>
-                  <Text>$150</Text>
+                  <Text style={{ marginLeft: 10 }}>
+                    Jubilados y mayores de 60
+                  </Text>
+                  <Text style={{ marginLeft: 10 }}>$150</Text>
                 </View>
                 <View style={styles.fee}>
-                  <Text>Jovenes de 12 a 18 años</Text>
-                  <Text>$150</Text>
+                  <Text style={{ marginLeft: 10 }}>
+                    Jovenes de 12 a 18 años
+                  </Text>
+                  <Text style={{ marginLeft: 10 }}>$150</Text>
                 </View>
                 <View style={styles.fee}>
-                  <Text>Docentes de primaria, secundaria y técnica</Text>
-                  <Text>$150</Text>
+                  <Text style={{ marginLeft: 10 }}>
+                    Docentes de primaria, secundaria y técnica
+                  </Text>
+                  <Text style={{ marginLeft: 10 }}>$150</Text>
                 </View>
                 <View style={styles.fee}>
-                  <Text>Menores de 12 y personas con discapacidad</Text>
-                  <Text>Gratis</Text>
+                  <Text style={{ marginLeft: 10 }}>
+                    Menores de 12 y personas con discapacidad
+                  </Text>
+                  <Text style={{ marginLeft: 10 }}>Gratis {"\n"}</Text>
                 </View>
-                <Text>
+                <Text style={{ marginLeft: 10 }}>
                   Los días martes el ingreso a la exposición Picasso en Uruguay
                   será gratuito para público general, realizándose la reserva
                   correspondiente de día y hora a través de Tickantel. El
                   ingreso al Museo Nacional de Artes Visuales, donde se
                   exhibirán las exposiciones Pedro Figari: Nostalgias africanas
                   y Colección del mnav, continuará siendo libre y gratuito. Las
-                  entradas se compran a través de Tickantel y Red Pagos.
+                  entradas se compran a través de Tickantel y Red Pagos. {"\n"}
                 </Text>
                 <View style={styles.buttons}>
                   <Button title={"Tickantel"} />
@@ -137,8 +158,13 @@ export default class HomeScreen extends React.Component {
                       "https://s3-sa-east-1.amazonaws.com/posifi-app/mapa.jpg"
                   }}
                 />
-                <Text>Tomás Giribaldi 2283 esq. Julio Herrera y Reissig</Text>
-                <Text> Parque Rodó - Montevideo - Uruguay</Text>
+                <Text style={{ marginLeft: 10 }}>
+                  Tomás Giribaldi 2283 esq. Julio Herrera y Reissig
+                </Text>
+                <Text style={{ marginLeft: 10 }}>
+                  {" "}
+                  Parque Rodó - Montevideo - Uruguay
+                </Text>
               </View>
             </Panel>
           </ScrollView>
@@ -149,6 +175,13 @@ export default class HomeScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  firstTitle: { color: "black", fontSize: 36, fontWeight: "300" },
+  secondTitle: {
+    color: "black",
+    fontSize: 36,
+    fontWeight: "300",
+    marginLeft: 26
+  },
   panel: {
     backgroundColor: "white",
     width: "100%"
@@ -177,5 +210,12 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     justifyContent: "flex-end"
+  },
+  backgroundImageContainer: {
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0
   }
 });

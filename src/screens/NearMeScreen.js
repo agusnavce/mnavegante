@@ -21,12 +21,10 @@ export default class NearMeScreen extends React.Component {
           <Image
             style={{ width: this.state.width, height: this.state.height }}
             resizeMode={"cover"}
-            source={{
-              uri: "https://www.slobidka.com/images/picasso/Picasso-4.jpg"
-            }}
+            source={require("../components/images/picasso_1.png")}
           />
         </View>
-        <View style={{ marginTop: 26 }}>
+        <View style={styles.mainTextContainer}>
           <Text style={styles.nameText}>Pablo</Text>
           <Text style={styles.nameText}>Picasso</Text>
           <Text style={styles.datesText}>30 Oct 1881 - 8 abr 1973 </Text>
@@ -51,6 +49,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center"
   },
+  mainTextContainer: {
+    marginTop: 24
+  },
   nameText: {
     backgroundColor: "transparent",
     color: "white",
@@ -67,15 +68,13 @@ const styles = StyleSheet.create({
   },
   description: {
     backgroundColor: "transparent",
-    color: OFF_BLACK,
+    color: OFF_WHITE,
     opacity: 0.9,
     fontSize: 16,
     fontWeight: "200"
   },
   titleText: {
-    backgroundColor: LIGHT_GRAY,
-    opacity: 0.3,
-    color: OFF_BLACK,
+    color: OFF_WHITE,
     fontSize: 26,
     fontWeight: "300"
   },

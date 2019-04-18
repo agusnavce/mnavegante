@@ -113,7 +113,8 @@ var styles = StyleSheet.create({
     flex: 1,
     padding: 10,
     color: "#2a2f43",
-    fontWeight: "bold"
+    fontWeight: "bold",
+    marginTop: 15
   },
   body: {
     paddingTop: 0

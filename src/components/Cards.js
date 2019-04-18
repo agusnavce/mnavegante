@@ -62,7 +62,7 @@ export default function Cards() {
       renderItem={renderItem}
       sliderWidth={sliderWidth}
       itemWidth={itemWidth}
-      sliderHeight={sliderWidth + 250}
+      sliderHeight={sliderWidth + 120}
       itemHeight={100}
       inactiveSlideScale={1}
       inactiveSlideOpacity={1}

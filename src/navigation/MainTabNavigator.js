@@ -10,6 +10,7 @@ import InformationScreen from "../screens/InformationScreen";
 import NearMeScreen from "../screens/NearMeScreen";
 import SearchScreen from "../screens/SearchScreen";
 import BlindAudioGuideScreen from "../screens/BlindAudioGuideScreen";
+import { OFF_BLACK, OFF_WHITE } from "../styles";
 
 const InformationStack = createStackNavigator({
   Information: InformationScreen
@@ -72,6 +73,8 @@ export default createBottomTabNavigator(
       showIcon: true,
       showLabel: true,
       lazyLoad: true,
+      activeBackgroundColor: "rgba(255, 255, 255, 0.3)",
+      activeTintColor: OFF_WHITE,
       style: {
         backgroundColor: "rgba(22, 22, 22, 0.3)",
         borderTopWidth: 1,
