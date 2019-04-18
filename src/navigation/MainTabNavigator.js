@@ -35,7 +35,9 @@ const NearMeStack = createStackNavigator({
 
 NearMeStack.navigationOptions = {
   tabBarLabel: "Cerca de mi",
-  tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name={"ios-radio"} />
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon focused={focused} name={"ios-radio"} />
+  )
 };
 
 const BlindAudioGuideStack = createStackNavigator({
@@ -47,20 +49,38 @@ BlindAudioGuideStack.navigationOptions = {
   tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name={"md-mic"} />
 };
 
-
 const SearchStack = createStackNavigator({
   Search: SearchScreen
 });
 
 SearchStack.navigationOptions = {
   tabBarLabel: "Buscar",
-  tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name={"md-search"} />
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon focused={focused} name={"md-search"} />
+  )
 };
 
-
-export default createBottomTabNavigator({
-  NearMeStack,
-  BlindAudioGuideStack,
-  SearchStack,
-  InformationStack
-});
+export default createBottomTabNavigator(
+  {
+    NearMeStack,
+    BlindAudioGuideStack,
+    SearchStack,
+    InformationStack
+  },
+  {
+    tabBarOptions: {
+      showIcon: true,
+      showLabel: true,
+      lazyLoad: true,
+      style: {
+        backgroundColor: "rgba(22, 22, 22, 0.3)",
+        borderTopWidth: 1,
+        borderTopColor: "#353535",
+        position: "absolute",
+        left: 0,
+        right: 0,
+        bottom: 0
+      }
+    }
+  }
+);

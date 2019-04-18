@@ -28,14 +28,27 @@ export default class WelcomeScreen extends React.Component {
             resizeMode={"cover"}
             source={{
               uri:
-                "https://66.media.tumblr.com/1c4f8ff1a94297e1c4cc74c45a7f359a/tumblr_o3qg7z3XYi1sp9j33o1_400.jpg"
+                "https://ep00.epimg.net/cultura/imagenes/2014/02/10/album/1392026724_895191_1392027526_album_normal.jpg"
             }}
           />
         </View>
 
         <View style={styles.contentContainer}>
           <View style={styles.welcomeContainer}>
-            <Text style={styles.welcomeText}>{"Bienvenido"}</Text>
+            <View style={styles.titleContainer}>
+              <Text>
+                <Text style={[styles.mnav, { fontWeight: "bold" }]}>
+                  {"mn"}
+                </Text>
+                <Text style={styles.mnav}>{"av"}</Text>
+              </Text>
+              <Text style={styles.welcomeText}>{"presenta"}</Text>
+              <Image
+                style={{ width: 145, height: 80 }}
+                resizeMode={"contain"}
+                source={require("../components/images/picasso.png")}
+              />
+            </View>
             <View>
               <TouchableOpacity
                 style={[
@@ -62,6 +75,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1
   },
+  titleContainer: {
+    alignItems: "center",
+    display: "flex",
+    marginVertical: 70
+  },
+  mnav: {
+    backgroundColor: "transparent",
+    color: OFF_BLACK,
+    opacity: 0.9,
+    fontSize: 46,
+    fontWeight: "200"
+  },
   backgroundImageContainer: {
     position: "absolute",
     top: 0,
@@ -82,8 +107,8 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
     color: OFF_BLACK,
     opacity: 0.9,
-    fontSize: 36,
-    fontWeight: "600"
+    fontSize: 16,
+    fontWeight: "200"
   },
   playAllButton: {
     backgroundColor: ACTION,
@@ -93,12 +118,12 @@ const styles = StyleSheet.create({
     height: 48,
     borderRadius: 9,
     marginVertical: 35,
-    shadowColor: "rgba(0,0,0, .4)", // IOS
+    shadowColor: "rgba(0,0,0, .6)", // IOS
     shadowOffset: { height: 1, width: 1 }, // IOS
     shadowOpacity: 1, // IOS
     shadowRadius: 1, //IOS
     backgroundColor: LIGHT_GRAY,
-    opacity: 0.5,
+    opacity: 0.7,
     elevation: 2, // Android
     height: 50,
     width: 100,

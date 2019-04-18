@@ -8,9 +8,8 @@ import {
   Button
 } from "react-native";
 
-import Panel from "../components/Panel";
 
-import { LIGHT_GRAY } from "../styles";
+import Panel from "../components/Panel";
 
 items = [
   {
@@ -23,22 +22,27 @@ items = [
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
-    title: "Información"
+    header: null
   };
 
   render() {
     return (
-      <View style={{ flex: 1, backgroundColor: LIGHT_GRAY }}>
+      <View style={{ flex: 1, marginTop: 28 }}>
+        <View style={{ marginRight: 2 }}>
+          <Text>Museo Nacional</Text>
+          <Text>de Artes Visuales</Text>
+        </View>
+        <View style={{ flex: 1, alignItems: "center" }}>
+          <Image
+            style={styles.image}
+            source={{
+              uri:
+                "https://media-cdn.tripadvisor.com/media/photo-s/07/8c/6d/d7/museu-nacional-de-artes.jpg"
+            }}
+          />
+        </View>
+
         <View style={[styles.container]}>
-          <View style={{ flex: 1, alignItems: "center" }}>
-            <Image
-              style={styles.image}
-              source={{
-                uri:
-                  "https://media-cdn.tripadvisor.com/media/photo-s/07/8c/6d/d7/museu-nacional-de-artes.jpg"
-              }}
-            />
-          </View>
           <ScrollView
             automaticallyAdjustContentInsets={false}
             contentContainerStyle={{ paddingBottom: 10 }}

@@ -18,13 +18,13 @@ function wp(percentage) {
 }
 
 const slideHeight = viewportHeight * 0.7;
-const slideWidth = wp(75);
+const slideWidth = wp(40);
 const itemHorizontalMargin = wp(2);
 
 export const sliderWidth = viewportWidth;
 export const itemWidth = slideWidth + itemHorizontalMargin * 2;
 
-var BigCardItem = ({ data: { illustration, title, subtitle } }) => {
+var BigCardItem = ({ data: { illustration, title } }) => {
   const uppercaseTitle = title ? (
     <Text style={styles.title} numberOfLines={2}>
       {title.toUpperCase()}
@@ -58,12 +58,7 @@ var BigCardItem = ({ data: { illustration, title, subtitle } }) => {
           }}
           style={styles.image}
         />
-        <View style={styles.titleContainer}>
-          {uppercaseTitle}
-          <Text style={styles.subtitle} numberOfLines={2}>
-            {subtitle}
-          </Text>
-        </View>
+        <View style={styles.titleContainer}>{uppercaseTitle}</View>
       </View>
     </TouchableOpacity>
   );
@@ -99,8 +94,8 @@ var styles = StyleSheet.create({
     borderRadius: entryBorderRadius
   },
   titleContainer: {
-    width: "80%",
-    marginLeft: 10
+    alignItems: "center",
+    justifyContent: "flex-end"
   },
   image: {
     ...StyleSheet.absoluteFillObject,
@@ -128,10 +123,10 @@ var styles = StyleSheet.create({
     borderRadius: entryBorderRadius,
     display: "flex",
     flexDirection: "row",
-    height: 400
+    height: 220
   },
   title: {
-    color: colors.black,
+    color: "white",
     fontSize: 13,
     fontWeight: "bold",
     letterSpacing: 0.5

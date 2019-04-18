@@ -18,11 +18,11 @@ function wp(percentage) {
 }
 
 const slideHeight = viewportHeight * 0.36;
-const slideWidth = wp(75);
+const slideWidth = wp(100);
 const itemHorizontalMargin = wp(2);
 
 export const sliderWidth = viewportWidth;
-export const itemWidth = slideWidth + itemHorizontalMargin * 2;
+export const itemWidth = slideWidth;
 
 var CardItem = ({ data: { illustration, title, subtitle } }) => {
   const uppercaseTitle = title ? (
@@ -42,15 +42,6 @@ var CardItem = ({ data: { illustration, title, subtitle } }) => {
       }}
     >
       <View style={styles.shadow} />
-      {/* <View style={styles.imageContainer}>
-        <ImageBackground
-          source={{
-            uri: illustration
-          }}
-          style={styles.image}
-        />
-        <View style={styles.radiusMask} />
-        </View> */}
       <View style={styles.textContainer}>
         <Image
           source={{
@@ -82,7 +73,7 @@ export const colors = {
 var styles = StyleSheet.create({
   slideInnerContainer: {
     width: itemWidth,
-    height: slideHeight,
+    // height: slideHeight,
     paddingHorizontal: itemHorizontalMargin,
     paddingBottom: 18 // needed for shadow
   },

@@ -3,18 +3,20 @@ import {
   StyleSheet,
   Text,
   View,
-  Image,
   TouchableHighlight,
   Animated
 } from "react-native";
+
+import { Icon } from "expo";
+import { LIGHT_GRAY } from "../styles";
 
 class Panels extends React.Component {
   constructor(props) {
     super(props);
 
     this.icons = {
-      up: require("./images/Arrowhead-01-128.png"),
-      down: require("./images/Arrowhead-Down-01-128.png")
+      up: "chevron-thin-up",
+      down: "chevron-thin-down"
     };
 
     this.state = {
@@ -80,7 +82,11 @@ class Panels extends React.Component {
             onPress={this.toggle.bind(this)}
             underlayColor="#f1f1f1"
           >
-            <Image style={styles.buttonImage} source={icon} />
+            <Icon.Entypo
+              name={icon}
+              size={20}
+              style={{ marginTop: 20, marginRight: 10 }}
+            />
           </TouchableHighlight>
         </View>
 
@@ -94,23 +100,20 @@ class Panels extends React.Component {
 
 var styles = StyleSheet.create({
   container: {
-    backgroundColor: "#D2D2D2",
+    backgroundColor: LIGHT_GRAY,
     margin: 10,
     overflow: "hidden",
     borderRadius: 8
   },
   titleContainer: {
-    flexDirection: "row"
+    flexDirection: "row",
+    height: 60
   },
   title: {
     flex: 1,
     padding: 10,
     color: "#2a2f43",
     fontWeight: "bold"
-  },
-  buttonImage: {
-    width: 30,
-    height: 25
   },
   body: {
     paddingTop: 0

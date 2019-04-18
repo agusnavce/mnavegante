@@ -9,7 +9,7 @@ ENTRIES2 = [
   {
     title: "Beautiful and dramatic Antelope Canyon",
     subtitle: "Lorem ipsum dolor sit amet et nuncat mergitur",
-    illustration: "https://i.imgur.com/UYiroysl.jpg"
+    illustration: "https://i.imgur.com/UPrs1EWl.jpg"
   },
   {
     title: "Earlier this morning, NYC",
@@ -25,7 +25,7 @@ function wp(percentage) {
   return Math.round(value);
 }
 
-const slideWidth = wp(75);
+const slideWidth = wp(40);
 const itemHorizontalMargin = wp(2);
 
 export const sliderWidth = viewportWidth;
@@ -42,9 +42,8 @@ export default function Cards() {
       renderItem={renderItem}
       sliderWidth={sliderWidth}
       itemWidth={itemWidth}
-      // sliderHeight={sliderWidth + 250}
-      itemHeight={300}
-      inactiveSlideScale={0.95}
+      itemHeight={130}
+      inactiveSlideScale={1}
       inactiveSlideOpacity={1}
       enableMomentum={true}
       activeSlideAlignment={"start"}
@@ -54,7 +53,6 @@ export default function Cards() {
         friction: 4,
         tension: 40
       }}
-      // vertical={true}
       windowSize={1}
     />
   );

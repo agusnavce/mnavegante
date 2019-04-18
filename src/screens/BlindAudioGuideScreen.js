@@ -3,7 +3,7 @@ import { View, Image, Text, StyleSheet } from "react-native";
 
 export default class BlindAudioGuide extends React.Component {
   static navigationOptions = {
-    title: "Guia para ciegos"
+    header: null
   };
 
   render() {
@@ -25,7 +25,6 @@ export default class BlindAudioGuide extends React.Component {
     );
   }
 }
-
 
 const styles = StyleSheet.create({
   viewStyle: {
