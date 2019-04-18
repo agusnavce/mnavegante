@@ -1,10 +1,11 @@
 import React from "react";
 import { View, StyleSheet, Dimensions, Image, Text } from "react-native";
+import { connect } from "react-redux";
 
 import Cards from "../components/BigCards";
 import { LIGHT_GRAY, OFF_BLACK, OFF_WHITE } from "../styles";
 
-export default class NearMeScreen extends React.Component {
+class NearMeScreen extends React.Component {
   static navigationOptions = {
     header: null
   };
@@ -42,6 +43,23 @@ export default class NearMeScreen extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    fetching: state.data.fetching,
+    fetched: state.data.fetched,
+    error: state.data.error,
+    bestPrediction: state.predictions.bestPrediction,
+    data: state.data.data,
+    info: state.data.info,
+    loading: state.data.loading
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { fetchData, fetchPredictions, sendWifiSignals, step }
+)(NearMeScreen);
 
 const styles = StyleSheet.create({
   container: {
