@@ -7,24 +7,21 @@ import {
   StyleSheet,
   Dimensions
 } from "react-native";
-
-const { width: viewportWidth, height: viewportHeight } = Dimensions.get(
-  "window"
-);
+import { withNavigation } from "react-navigation";
+const { width: viewportWidth } = Dimensions.get("window");
 
 function wp(percentage) {
   const value = (percentage * viewportWidth) / 100;
   return Math.round(value);
 }
 
-const slideHeight = viewportHeight * 0.36;
 const slideWidth = wp(100);
 const itemHorizontalMargin = wp(2);
 
 export const sliderWidth = viewportWidth;
 export const itemWidth = slideWidth;
 
-var CardItem = ({ data: { illustration, title, subtitle } }) => {
+var CardItem = ({ data: { illustration, title, subtitle, id = 1 }, props }) => {
   const uppercaseTitle = title ? (
     <Text style={styles.title} numberOfLines={2}>
       {title.toUpperCase()}
@@ -38,7 +35,7 @@ var CardItem = ({ data: { illustration, title, subtitle } }) => {
       activeOpacity={1}
       style={styles.slideInnerContainer}
       onPress={() => {
-        alert(`You've clicked '${title}'`);
+        props.navigate("Painting", { id });
       }}
     >
       <View style={styles.shadow} />
@@ -60,7 +57,7 @@ var CardItem = ({ data: { illustration, title, subtitle } }) => {
   );
 };
 
-export default CardItem;
+export default withNavigation(CardItem);
 
 const entryBorderRadius = 8;
 export const colors = {
@@ -89,8 +86,8 @@ var styles = StyleSheet.create({
     shadowRadius: 10,
     borderRadius: entryBorderRadius
   },
-  titleContainer:{
-    width: '80%',
+  titleContainer: {
+    width: "80%",
     marginLeft: 10
   },
   imageContainer: {
@@ -126,7 +123,7 @@ var styles = StyleSheet.create({
     // borderBottomLeftRadius: entryBorderRadius,
     borderRadius: entryBorderRadius,
     display: "flex",
-    flexDirection: "row",
+    flexDirection: "row"
   },
   title: {
     color: colors.black,

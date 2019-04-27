@@ -3,7 +3,8 @@ import { View, StyleSheet, Dimensions, Image, Text } from "react-native";
 import { connect } from "react-redux";
 
 import Cards from "../components/BigCards";
-import { LIGHT_GRAY, OFF_BLACK, OFF_WHITE } from "../styles";
+import { LIGHT_GRAY, OFF_WHITE } from "../styles";
+import { fetchData, fetchPredictions, sendWifiSignals } from "../actions";
 
 class NearMeScreen extends React.Component {
   static navigationOptions = {
@@ -14,6 +15,90 @@ class NearMeScreen extends React.Component {
     width: Dimensions.get("window").width,
     height: Dimensions.get("window").height
   };
+  // checkNearZone = () => {
+  //   this.setState({
+  //     loading: false
+  //   });
+  //   this.props.sendWifiSignals();
+
+  //   this.props.fetchPredictions();
+
+  //   // Enqueue the new element
+
+  //   var next = this.state.head + 1;
+
+  //   if (next >= this.state.capacity) next = 0;
+
+  //   var buffer = this.state.buffer;
+
+  //   var prediction = this.props.bestPrediction;
+
+  //   buffer[this.state.head] = prediction;
+
+  //   this.setState({
+  //     buffer,
+  //     head: next
+  //   });
+
+  //   var actualPrediction = this.getBest(buffer);
+
+  //   if (actualPrediction !== this.state.previousPrediction) {
+  //     this.props.fetchData(actualPrediction);
+  //     this.setState({ previousPrediction: actualPrediction });
+  //   }
+  // };
+
+  // getBest = array => {
+  //   var result = {};
+  //   array.map(locationArray => {
+  //     if (locationArray !== undefined && locationArray.map !== undefined) {
+  //       return locationArray.map(elem => {
+  //         if (result[elem.location] !== undefined) {
+  //           result[elem.location] = result[elem.location] + elem.probability;
+  //         } else {
+  //           result[elem.location] = elem.probability;
+  //         }
+  //       });
+  //     }
+  //   });
+
+  //   var bestLocation = {
+  //     location: null,
+  //     probability: 0
+  //   };
+  //   Object.keys(result).map(key => {
+  //     if (result[key] > bestLocation.probability) {
+  //       bestLocation.location = key;
+  //       bestLocation.probability = result[key];
+  //     }
+  //   });
+  //   return bestLocation.location;
+  // };
+
+  // componentWillMount() {
+  //   this.setState({
+  //     loading: true,
+  //     buffer: new Array(10),
+  //     capacity: 10,
+  //     head: 0,
+  //     previousPrediction: ""
+  //   });
+
+  //   this.props.sendWifiSignals();
+
+  //   this.props.fetchPredictions();
+
+  //   var predictionIntervalId = setInterval(() => {
+  //     this.checkNearZone();
+  //   }, 1000);
+
+  //   this.setState({
+  //     predictionIntervalId
+  //   });
+  // }
+  // componentWillUnmount() {
+  //   clearInterval(this.state.predictionIntervalId);
+  // }
 
   render() {
     return (
@@ -22,7 +107,7 @@ class NearMeScreen extends React.Component {
           <Image
             style={{ width: this.state.width, height: this.state.height }}
             resizeMode={"cover"}
-            source={require("../components/images/picasso_1.png")}
+            source={require("../../assets/images/picasso_1.png")}
           />
         </View>
         <View style={styles.mainTextContainer}>
@@ -58,7 +143,7 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { fetchData, fetchPredictions, sendWifiSignals, step }
+  { fetchData, fetchPredictions, sendWifiSignals }
 )(NearMeScreen);
 
 const styles = StyleSheet.create({
@@ -75,26 +160,30 @@ const styles = StyleSheet.create({
     color: "white",
     opacity: 0.9,
     fontSize: 56,
-    fontWeight: "300"
+    fontWeight: "300",
+    fontFamily: "free-sans"
   },
   datesText: {
     backgroundColor: "transparent",
     color: "white",
     opacity: 0.9,
     fontSize: 26,
-    fontWeight: "200"
+    fontWeight: "200",
+    fontFamily: "free-sans"
   },
   description: {
     backgroundColor: "transparent",
     color: OFF_WHITE,
     opacity: 0.9,
     fontSize: 16,
-    fontWeight: "200"
+    fontWeight: "200",
+    fontFamily: "free-sans"
   },
   titleText: {
     color: OFF_WHITE,
     fontSize: 26,
-    fontWeight: "300"
+    fontWeight: "300",
+    fontFamily: "free-sans"
   },
   cards: { top: 70 },
   backgroundImageContainer: {

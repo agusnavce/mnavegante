@@ -17,7 +17,7 @@ export default class BlindAudioGuide extends React.Component {
           <Image
             style={{ width: this.state.width, height: this.state.height }}
             resizeMode={"cover"}
-            source={require("../components/images/picasso_2.png")}
+            source={require("../../assets/images/picasso_2.png")}
           />
         </View>
         <Text style={styles.textStyle}>

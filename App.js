@@ -8,6 +8,7 @@ import ReduxThunk from "redux-thunk";
 import { reactotronRedux } from "reactotron-redux";
 import Reactotron from "reactotron-react-native";
 import { PermissionsAndroid } from "react-native";
+import reducers from "./src/reducers";
 
 let store;
 
@@ -17,17 +18,14 @@ if (__DEV__) {
     .use(reactotronRedux())
     .connect(); //Don't forget about me!
   store = createStore(
-    (state = {}, action) => state,
+    reducers,
     compose(
       applyMiddleware(ReduxThunk),
       reactotron.createEnhancer()
     )
   );
 } else {
-  store = createStore(
-    (state = {}, action) => state,
-    applyMiddleware(ReduxThunk)
-  );
+  store = createStore(reducers, applyMiddleware(ReduxThunk));
 }
 
 export default class App extends React.Component {
@@ -54,9 +52,9 @@ export default class App extends React.Component {
   //     console.warn(err);
   //   }
   // }
-  componentDidMount() {
-    this.askForUserPermissions();
-  }
+  // componentDidMount() {
+  //   this.askForUserPermissions();
+  // }
 
   render() {
     if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
@@ -82,15 +80,22 @@ export default class App extends React.Component {
   _loadResourcesAsync = async () => {
     return Promise.all([
       Asset.loadAsync([
-        require("./assets/images/robot-dev.png"),
-        require("./assets/images/robot-prod.png")
+        require("./assets/images/picasso.png"),
+        require("./assets/images/picasso_1.png"),
+        require("./assets/images/picasso_2.png"),
+        require("./assets/images/picasso_3.png"),
+        require("./assets/images/museo.jpg"),
+        require("./assets/images/mapa.jpg"),
+        require("./assets/images/welcome.jpg")
       ]),
+
       Font.loadAsync({
         // This is the font that we are using for our tab bar
         ...Icon.Ionicons.font,
         // We include SpaceMono because we use it in HomeScreen.js. Feel free
         // to remove this if you are not using it in your app
-        "space-mono": require("./assets/fonts/SpaceMono-Regular.ttf")
+        "free-sans": require("./assets/fonts/Museum.ttf"),
+        "free-sans-bold": require("./assets/fonts/FreeSansBold.ttf")
       })
     ]);
   };

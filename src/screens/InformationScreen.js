@@ -36,13 +36,10 @@ export default class HomeScreen extends React.Component {
           <Text style={styles.firstTitle}>Museo Nacional</Text>
           <Text style={styles.secondTitle}>de Artes Visuales</Text>
         </View>
-        <View style={{ flex: 1, alignItems: "center" }}>
+        <View style={{ alignItems: "center" }}>
           <Image
             style={styles.image}
-            source={{
-              uri:
-                "https://media-cdn.tripadvisor.com/media/photo-s/07/8c/6d/d7/museu-nacional-de-artes.jpg"
-            }}
+            source={require("../../assets/images/museo.jpg")}
           />
         </View>
 
@@ -87,13 +84,25 @@ export default class HomeScreen extends React.Component {
 
             <Panel title={"Horarios y fechas"}>
               <View style={styles.panel}>
-                <Text style={{ marginLeft: 10, fontWeight: "bold" }}>
+                <Text
+                  style={{
+                    marginLeft: 10,
+                    fontFamily: "free-sans",
+                    fontWeight: "bold"
+                  }}
+                >
                   Abierto siete dias a la semana:
                 </Text>
                 <Text style={{ marginLeft: 10 }}>
                   Martes a Domingo: 10am - 8pm{" "}
                 </Text>
-                <Text style={{ marginLeft: 10, fontWeight: "bold" }}>
+                <Text
+                  style={{
+                    marginLeft: 10,
+                    fontFamily: "free-sans",
+                    fontWeight: "bold"
+                  }}
+                >
                   Fechas de la exposición:
                 </Text>
                 <Text style={{ marginLeft: 10 }}>
@@ -153,10 +162,7 @@ export default class HomeScreen extends React.Component {
               <View style={styles.panel}>
                 <Image
                   style={styles.mapImg}
-                  source={{
-                    uri:
-                      "https://s3-sa-east-1.amazonaws.com/posifi-app/mapa.jpg"
-                  }}
+                  source={require("../../assets/images/mapa.jpg")}
                 />
                 <Text style={{ marginLeft: 10 }}>
                   Tomás Giribaldi 2283 esq. Julio Herrera y Reissig
@@ -175,12 +181,18 @@ export default class HomeScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  firstTitle: { color: "black", fontSize: 36, fontWeight: "300" },
+  firstTitle: {
+    color: "black",
+    fontSize: 36,
+    fontWeight: "300",
+    fontFamily: "free-sans"
+  },
   secondTitle: {
     color: "black",
     fontSize: 36,
     fontWeight: "300",
-    marginLeft: 26
+    marginLeft: 26,
+    fontFamily: "free-sans-bold"
   },
   panel: {
     backgroundColor: "white",
@@ -189,11 +201,12 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "stretch",
     flex: 1,
-    backgroundColor: "#ffffff"
+    backgroundColor: "#ffffff",
+    marginBottom: 60
   },
   image: {
-    flex: 1,
     width: "94%",
+    height: 200,
     borderRadius: 8
   },
   mapImg: {

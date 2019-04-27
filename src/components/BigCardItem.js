@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Dimensions
 } from "react-native";
+import { withNavigation } from "react-navigation";
 
 const { width: viewportWidth, height: viewportHeight } = Dimensions.get(
   "window"
@@ -24,7 +25,9 @@ const itemHorizontalMargin = wp(2);
 export const sliderWidth = viewportWidth;
 export const itemWidth = slideWidth + itemHorizontalMargin * 2;
 
-var BigCardItem = ({ data: { illustration, title } }) => {
+
+
+var BigCardItem = ({ data: { illustration, title, id = 1 }, navigation }) => {
   const uppercaseTitle = title ? (
     <Text style={styles.title} numberOfLines={2}>
       {title.toUpperCase()}
@@ -38,19 +41,11 @@ var BigCardItem = ({ data: { illustration, title } }) => {
       activeOpacity={1}
       style={styles.slideInnerContainer}
       onPress={() => {
-        alert(`You've clicked '${title}'`);
+        navigation.navigate("Painting", { id });
       }}
     >
       <View style={styles.shadow} />
-      {/* <View style={styles.imageContainer}>
-        <ImageBackground
-          source={{
-            uri: illustration
-          }}
-          style={styles.image}
-        />
-        <View style={styles.radiusMask} />
-        </View> */}
+
       <View style={styles.textContainer}>
         <Image
           source={{
@@ -64,7 +59,7 @@ var BigCardItem = ({ data: { illustration, title } }) => {
   );
 };
 
-export default BigCardItem;
+export default withNavigation(BigCardItem);
 
 const entryBorderRadius = 8;
 export const colors = {

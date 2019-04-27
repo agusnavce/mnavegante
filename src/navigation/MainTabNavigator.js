@@ -10,7 +10,7 @@ import InformationScreen from "../screens/InformationScreen";
 import NearMeScreen from "../screens/NearMeScreen";
 import SearchScreen from "../screens/SearchScreen";
 import BlindAudioGuideScreen from "../screens/BlindAudioGuideScreen";
-import { OFF_BLACK, OFF_WHITE } from "../styles";
+import { OFF_WHITE } from "../styles";
 
 const InformationStack = createStackNavigator({
   Information: InformationScreen

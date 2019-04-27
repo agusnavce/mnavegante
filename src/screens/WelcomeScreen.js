@@ -26,10 +26,7 @@ export default class WelcomeScreen extends React.Component {
           <Image
             style={{ width: this.state.width, height: this.state.height }}
             resizeMode={"cover"}
-            source={{
-              uri:
-                "https://ep00.epimg.net/cultura/imagenes/2014/02/10/album/1392026724_895191_1392027526_album_normal.jpg"
-            }}
+            source={require('../../assets/images/welcome.jpg')}
           />
         </View>
 
@@ -46,7 +43,7 @@ export default class WelcomeScreen extends React.Component {
               <Image
                 style={{ width: 145, height: 80 }}
                 resizeMode={"contain"}
-                source={require("../components/images/picasso.png")}
+                source={require("../../assets/images/picasso.png")}
               />
             </View>
             <View>

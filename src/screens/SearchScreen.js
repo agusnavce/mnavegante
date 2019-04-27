@@ -19,7 +19,7 @@ export default class SearchScreen extends React.Component {
           <Image
             style={{ width: this.state.width, height: this.state.height }}
             resizeMode={"cover"}
-            source={require("../components/images/picasso_3.png")}
+            source={require("../../assets/images/picasso_3.png")}
           />
         </View>
         <View style={{ marginTop: 26, marginBottom: 26 }}>

@@ -1,4 +1,4 @@
-import { API } from "react-native-dotenv";
+import { API } from "./urls";
 import wifi from "react-native-android-wifi";
 import { SEND_WIFI_ERROR, SEND_WIFI_SUCCESS, SEND_WIFI_START } from "./types";
 import { AsyncStorage } from "react-native";
@@ -9,7 +9,7 @@ export const sendWifiSignals = () => {
     dispatch({ type: SEND_WIFI_START });
     var wifiList = [];
     var device = await AsyncStorage.getItem("id");
-    if (value === null) {
+    if (device === null) {
       device = cuid();
       await AsyncStorage.setItem("id", device);
     } else {

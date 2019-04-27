@@ -107,14 +107,15 @@ var styles = StyleSheet.create({
   },
   titleContainer: {
     flexDirection: "row",
-    height: 60
+    height: 60,
   },
   title: {
     flex: 1,
     padding: 10,
     color: "#2a2f43",
     fontWeight: "bold",
-    marginTop: 15
+    marginTop: 15,
+    fontFamily: "free-sans"
   },
   body: {
     paddingTop: 0
