@@ -7,7 +7,6 @@ import { applyMiddleware, createStore, compose } from "redux";
 import ReduxThunk from "redux-thunk";
 import { reactotronRedux } from "reactotron-redux";
 import Reactotron from "reactotron-react-native";
-import { PermissionsAndroid } from "react-native";
 import reducers from "./src/reducers";
 
 let store;
@@ -32,29 +31,6 @@ export default class App extends React.Component {
   state = {
     isLoadingComplete: false
   };
-  // async askForUserPermissions() {
-  //   try {
-  //     const granted = await PermissionsAndroid.request(
-  //       PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-  //       {
-  //         title: "Wifi networks",
-  //         message: "We need your permission in order to find wifi networks"
-  //       }
-  //     );
-  //     if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-  //       console.log("Thank you for your permission! :)");
-  //     } else {
-  //       console.log(
-  //         "You will not able to retrieve wifi available networks list"
-  //       );
-  //     }
-  //   } catch (err) {
-  //     console.warn(err);
-  //   }
-  // }
-  // componentDidMount() {
-  //   this.askForUserPermissions();
-  // }
 
   render() {
     if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {

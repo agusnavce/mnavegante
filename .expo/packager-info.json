@@ -1,10 +1,10 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": null,
-  "packagerPort": null,
-  "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
+  "expoServerPort": 19000,
+  "packagerPort": 19001,
+  "packagerPid": 9882,
+  "expoServerNgrokUrl": "https://x5-wes.agusnavce.mnavegante.exp.direct",
+  "packagerNgrokUrl": "https://packager.x5-wes.agusnavce.mnavegante.exp.direct",
+  "ngrokPid": 9934,
   "webpackServerPort": null
 }

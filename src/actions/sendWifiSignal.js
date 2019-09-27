@@ -1,48 +1,53 @@
 import { API } from "./urls";
 import wifi from "react-native-android-wifi";
-import { SEND_WIFI_ERROR, SEND_WIFI_SUCCESS, SEND_WIFI_START } from "./types";
-import { AsyncStorage } from "react-native";
-import cuid from "cuid";
+import {
+  SEND_WIFI_ERROR,
+  FETCH_PREDICTIONS_SUCCESS,
+  SEND_WIFI_START
+} from "./types";
 
 export const sendWifiSignals = () => {
   return async dispatch => {
     dispatch({ type: SEND_WIFI_START });
     var wifiList = [];
-    var device = await AsyncStorage.getItem("id");
-    if (device === null) {
-      device = cuid();
-      await AsyncStorage.setItem("id", device);
-    } else {
-      wifi.reScanAndLoadWifiList(
-        wifiStringList => {
-          wifiList = [].concat(JSON.parse(wifiStringList));
-          var lis = wifiList.reduce((previous, item) => {
-            previous[item.BSSID] = item.level;
-            return previous;
-          }, {});
-          fetch(API + "/data", {
-            method: "POST",
-            headers: {
-              Accept: "application/json",
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-              s: { wifi: lis },
-              d: device,
-              f: "posifi"
-            })
+    var has_5ghz = true;
+    wifi.reScanAndLoadWifiList(
+      wifiStringList => {
+        wifiList = [].concat(JSON.parse(wifiStringList));
+        var lis = wifiList.reduce((previous, item) => {
+          console.log(item);
+          previous[item.BSSID] = item.level;
+          return previous;
+        }, {});
+        fetch(API + "/localize", {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            wifi: lis,
+            has_5_ghz: has_5ghz
           })
-            .then(() => {
-              dispatch({ type: SEND_WIFI_SUCCESS });
-            })
-            .catch(err => {
-              dispatch({ type: SEND_WIFI_ERROR, payload: err });
+        })
+          .then(res => {
+            res.json().then(data => {
+              return dispatch({
+                type: FETCH_PREDICTIONS_SUCCESS,
+                payload: {
+                  location: data.location,
+                  probability: data.probabilities[data.location]
+                }
+              });
             });
-        },
-        error => {
-          console.log(error);
-        }
-      );
-    }
+          })
+          .catch(err => {
+            dispatch({ type: SEND_WIFI_ERROR, payload: err });
+          });
+      },
+      error => {
+        console.log(error);
+      }
+    );
   };
 };

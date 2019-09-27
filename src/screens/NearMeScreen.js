@@ -3,106 +3,114 @@ import { View, StyleSheet, Dimensions, Image, Text } from "react-native";
 import { connect } from "react-redux";
 
 import Cards from "../components/BigCards";
+import Spinner from "../components/Spinner";
+
 import { LIGHT_GRAY, OFF_WHITE } from "../styles";
-import { fetchData, fetchPredictions, sendWifiSignals } from "../actions";
+import { fetchData, sendWifiSignals } from "../actions";
+import { NavigationEvents } from "react-navigation";
 
 class NearMeScreen extends React.Component {
   static navigationOptions = {
     header: null
   };
-
   state = {
     width: Dimensions.get("window").width,
     height: Dimensions.get("window").height
   };
-  // checkNearZone = () => {
-  //   this.setState({
-  //     loading: false
-  //   });
-  //   this.props.sendWifiSignals();
+  checkNearZone = () => {
+    this.setState({
+      loading: false
+    });
+    this.props.sendWifiSignals();
 
-  //   this.props.fetchPredictions();
+    // Enqueue the new element
 
-  //   // Enqueue the new element
+    var next = this.state.head + 1;
 
-  //   var next = this.state.head + 1;
+    if (next >= this.state.capacity) next = 0;
 
-  //   if (next >= this.state.capacity) next = 0;
+    var buffer = this.state.buffer;
 
-  //   var buffer = this.state.buffer;
+    var prediction = this.props.bestPrediction;
 
-  //   var prediction = this.props.bestPrediction;
+    if (prediction !== "") {
+      buffer[this.state.head] = prediction;
 
-  //   buffer[this.state.head] = prediction;
+      this.setState({
+        buffer,
+        head: next
+      });
+    }
 
-  //   this.setState({
-  //     buffer,
-  //     head: next
-  //   });
+    var actualPrediction = this.getBest(buffer);
 
-  //   var actualPrediction = this.getBest(buffer);
+    if (
+      actualPrediction !== this.state.previousPrediction &&
+      actualPrediction !== null
+    ) {
+      this.props.fetchData(actualPrediction);
+      this.setState({ previousPrediction: actualPrediction });
+    }
+  };
 
-  //   if (actualPrediction !== this.state.previousPrediction) {
-  //     this.props.fetchData(actualPrediction);
-  //     this.setState({ previousPrediction: actualPrediction });
-  //   }
-  // };
+  getBest = array => {
+    var result = {};
+    array.map(elem => {
+      if (result[elem.location] !== undefined) {
+        result[elem.location] = result[elem.location] + elem.probability;
+      } else {
+        result[elem.location] = elem.probability;
+      }
+    });
 
-  // getBest = array => {
-  //   var result = {};
-  //   array.map(locationArray => {
-  //     if (locationArray !== undefined && locationArray.map !== undefined) {
-  //       return locationArray.map(elem => {
-  //         if (result[elem.location] !== undefined) {
-  //           result[elem.location] = result[elem.location] + elem.probability;
-  //         } else {
-  //           result[elem.location] = elem.probability;
-  //         }
-  //       });
-  //     }
-  //   });
+    var bestLocation = {
+      location: null,
+      probability: 0
+    };
+    Object.keys(result).map(key => {
+      if (result[key] > bestLocation.probability) {
+        bestLocation.location = key;
+        bestLocation.probability = result[key];
+      }
+    });
+    return bestLocation.location;
+  };
 
-  //   var bestLocation = {
-  //     location: null,
-  //     probability: 0
-  //   };
-  //   Object.keys(result).map(key => {
-  //     if (result[key] > bestLocation.probability) {
-  //       bestLocation.location = key;
-  //       bestLocation.probability = result[key];
-  //     }
-  //   });
-  //   return bestLocation.location;
-  // };
-
-  // componentWillMount() {
-  //   this.setState({
-  //     loading: true,
-  //     buffer: new Array(10),
-  //     capacity: 10,
-  //     head: 0,
-  //     previousPrediction: ""
-  //   });
-
-  //   this.props.sendWifiSignals();
-
-  //   this.props.fetchPredictions();
-
-  //   var predictionIntervalId = setInterval(() => {
-  //     this.checkNearZone();
-  //   }, 1000);
-
-  //   this.setState({
-  //     predictionIntervalId
-  //   });
-  // }
-  // componentWillUnmount() {
-  //   clearInterval(this.state.predictionIntervalId);
-  // }
+  renderCards = () => {
+    let spin = this.props.loading || false;
+    let items = this.props.info;
+    if (spin === true) {
+      return <Spinner />;
+    } else {
+      return <Cards items={items} />;
+    }
+  };
 
   render() {
     return (
       <View style={{ backgroundColor: LIGHT_GRAY }}>
+        <NavigationEvents
+          onWillBlur={() => clearInterval(this.state.predictionIntervalId)}
+          onDidFocus={() => {
+            this.setState({
+              loading: true,
+              buffer: new Array(10),
+              capacity: 10,
+              head: 0,
+              previousPrediction: ""
+            });
+
+            this.props.sendWifiSignals();
+
+            var predictionIntervalId = setInterval(() => {
+              this.checkNearZone();
+            }, 1000);
+
+            this.setState({
+              predictionIntervalId
+            });
+          }}
+        />
         <View style={styles.backgroundImageContainer}>
           <Image
             style={{ width: this.state.width, height: this.state.height }}
@@ -111,8 +119,7 @@ class NearMeScreen extends React.Component {
           />
         </View>
         <View style={styles.mainTextContainer}>
-          <Text style={styles.nameText}>Pablo</Text>
-          <Text style={styles.nameText}>Picasso</Text>
+          <Text style={styles.nameText}>Pablo Picasso</Text>
           <Text style={styles.datesText}>30 Oct 1881 - 8 abr 1973 </Text>
           <Text style={styles.description}>
             Pablo Picasso es uno de los pintores más famosos del mundo y uno de
@@ -122,7 +129,7 @@ class NearMeScreen extends React.Component {
         </View>
         <View style={styles.cards}>
           <Text style={styles.titleText}> Pinturas cerca de mi</Text>
-          <Cards />
+          {this.renderCards()}
         </View>
       </View>
     );
@@ -135,7 +142,6 @@ const mapStateToProps = state => {
     fetched: state.data.fetched,
     error: state.data.error,
     bestPrediction: state.predictions.bestPrediction,
-    data: state.data.data,
     info: state.data.info,
     loading: state.data.loading
   };
@@ -143,7 +149,7 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { fetchData, fetchPredictions, sendWifiSignals }
+  { fetchData, sendWifiSignals }
 )(NearMeScreen);
 
 const styles = StyleSheet.create({
@@ -153,7 +159,8 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   mainTextContainer: {
-    marginTop: 24
+    marginTop: 24,
+    marginLeft: 24
   },
   nameText: {
     backgroundColor: "transparent",
@@ -161,7 +168,8 @@ const styles = StyleSheet.create({
     opacity: 0.9,
     fontSize: 56,
     fontWeight: "300",
-    fontFamily: "free-sans"
+    fontFamily: "free-sans",
+    marginTop: 20
   },
   datesText: {
     backgroundColor: "transparent",
@@ -169,15 +177,16 @@ const styles = StyleSheet.create({
     opacity: 0.9,
     fontSize: 26,
     fontWeight: "200",
-    fontFamily: "free-sans"
+    fontFamily: "free-sans",
+    marginLeft: 20
   },
   description: {
+    marginTop: 10,
     backgroundColor: "transparent",
     color: OFF_WHITE,
     opacity: 0.9,
     fontSize: 16,
-    fontWeight: "200",
-    fontFamily: "free-sans"
+    fontWeight: "200"
   },
   titleText: {
     color: OFF_WHITE,

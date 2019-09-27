@@ -35,10 +35,10 @@ function renderItem({ item, index }) {
   return <CardItem data={item} even={(index + 1) % 2 === 0} />;
 }
 
-export default function Cards() {
+export default function Cards({ items }) {
   return (
     <Carousel
-      data={ENTRIES2}
+      data={items || []}
       renderItem={renderItem}
       sliderWidth={sliderWidth}
       itemWidth={itemWidth}

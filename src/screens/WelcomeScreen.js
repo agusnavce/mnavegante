@@ -75,14 +75,14 @@ const styles = StyleSheet.create({
   titleContainer: {
     alignItems: "center",
     display: "flex",
-    marginVertical: 70
+    marginVertical: 75
   },
   mnav: {
     backgroundColor: "transparent",
     color: OFF_BLACK,
     opacity: 0.9,
-    fontSize: 46,
-    fontWeight: "200"
+    fontSize: 56,
+    fontWeight: "300"
   },
   backgroundImageContainer: {
     position: "absolute",
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
     color: OFF_BLACK,
     opacity: 0.9,
-    fontSize: 16,
+    fontSize: 26,
     fontWeight: "200"
   },
   playAllButton: {

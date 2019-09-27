@@ -5,39 +5,6 @@ import { Dimensions, StyleSheet } from "react-native";
 
 import CardItem from "./CardItem";
 
-ENTRIES2 = [
-  {
-    title: "Beautiful and dramatic",
-    subtitle: "Lorem ipsum dolor sit amet et nuncat mergitur",
-    illustration: "https://i.imgur.com/UYiroysl.jpg"
-  },
-  {
-    title: "Earlier this morning, NYC",
-    subtitle: "Lorem ipsum dolor sit amet",
-    illustration: "https://i.imgur.com/UPrs1EWl.jpg"
-  },
-  {
-    title: "Beautiful and dramatic ",
-    subtitle: "Lorem ipsum dolor sit amet et nuncat mergitur",
-    illustration: "https://i.imgur.com/UYiroysl.jpg"
-  },
-  {
-    title: "Earlier this morning, NYC",
-    subtitle: "Lorem ipsum dolor sit amet",
-    illustration: "https://i.imgur.com/UPrs1EWl.jpg"
-  },
-  {
-    title: "Beautiful and dramatic ",
-    subtitle: "Lorem ipsum dolor sit amet et nuncat mergitur",
-    illustration: "https://i.imgur.com/UYiroysl.jpg"
-  },
-  {
-    title: "Earlier this morning, NYC",
-    subtitle: "Lorem ipsum dolor sit amet",
-    illustration: "https://i.imgur.com/UPrs1EWl.jpg"
-  }
-];
-
 const { width: viewportWidth } = Dimensions.get("window");
 
 function wp(percentage) {
@@ -55,10 +22,10 @@ function renderItem({ item, index }) {
   return <CardItem data={item} even={(index + 1) % 2 === 0} />;
 }
 
-export default function Cards() {
+export default function Cards({ items }) {
   return (
     <Carousel
-      data={ENTRIES2}
+      data={items}
       renderItem={renderItem}
       sliderWidth={sliderWidth}
       itemWidth={itemWidth}

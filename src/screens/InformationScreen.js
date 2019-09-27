@@ -8,6 +8,7 @@ import {
   Button,
   Dimensions
 } from "react-native";
+import { WebBrowser } from "expo";
 
 import Panel from "../components/Panel";
 
@@ -29,10 +30,19 @@ export default class HomeScreen extends React.Component {
     height: Dimensions.get("window").height
   };
 
+  _handleTickAntel = () => {
+    WebBrowser.openBrowserAsync(
+      "https://tickantel.com.uy/inicio/landing/sitio/Picasso?0"
+    );
+  };
+  _handleRedPagos = () => {
+    WebBrowser.openBrowserAsync("http://www.redpagos.com.uy/principal/");
+  };
+
   render() {
     return (
       <View style={{ flex: 1, marginTop: 26 }}>
-        <View style={{ marginRight: 2 }}>
+        <View style={{ marginRight: 5 }}>
           <Text style={styles.firstTitle}>Museo Nacional</Text>
           <Text style={styles.secondTitle}>de Artes Visuales</Text>
         </View>
@@ -152,8 +162,16 @@ export default class HomeScreen extends React.Component {
                   entradas se compran a través de Tickantel y Red Pagos. {"\n"}
                 </Text>
                 <View style={styles.buttons}>
-                  <Button title={"Tickantel"} />
-                  <Button title={"Red Pagos"} />
+                  <Button
+                    onPress={this._handleTickAntel}
+                    title={"Tickantel"}
+                    style={{ marginRight: 20 }}
+                  />
+                  <Button
+                    onPress={this._handleRedPagos}
+                    title={"Red Pagos"}
+                    style={{ marginLeft: 20 }}
+                  />
                 </View>
               </View>
             </Panel>
@@ -185,14 +203,15 @@ const styles = StyleSheet.create({
     color: "black",
     fontSize: 36,
     fontWeight: "300",
-    fontFamily: "free-sans"
+    fontFamily: "free-sans",
+    marginLeft: 10
   },
   secondTitle: {
     color: "black",
     fontSize: 36,
     fontWeight: "300",
     marginLeft: 26,
-    fontFamily: "free-sans-bold"
+    fontFamily: "free-sans"
   },
   panel: {
     backgroundColor: "white",

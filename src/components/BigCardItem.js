@@ -25,12 +25,13 @@ const itemHorizontalMargin = wp(2);
 export const sliderWidth = viewportWidth;
 export const itemWidth = slideWidth + itemHorizontalMargin * 2;
 
-
-
-var BigCardItem = ({ data: { illustration, title, id = 1 }, navigation }) => {
-  const uppercaseTitle = title ? (
+var BigCardItem = ({
+  data: { image_url, location_name, piece_id },
+  navigation
+}) => {
+  const uppercaseTitle = location_name ? (
     <Text style={styles.title} numberOfLines={2}>
-      {title.toUpperCase()}
+      {location_name.toUpperCase()}
     </Text>
   ) : (
     false
@@ -41,7 +42,7 @@ var BigCardItem = ({ data: { illustration, title, id = 1 }, navigation }) => {
       activeOpacity={1}
       style={styles.slideInnerContainer}
       onPress={() => {
-        navigation.navigate("Painting", { id });
+        navigation.navigate("Painting", { id: piece_id });
       }}
     >
       <View style={styles.shadow} />
@@ -49,7 +50,7 @@ var BigCardItem = ({ data: { illustration, title, id = 1 }, navigation }) => {
       <View style={styles.textContainer}>
         <Image
           source={{
-            uri: illustration
+            uri: image_url
           }}
           style={styles.image}
         />

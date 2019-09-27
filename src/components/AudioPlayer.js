@@ -7,8 +7,17 @@ import {
   Dimensions,
   Image
 } from "react-native";
+import { connect } from "react-redux";
 import { Svg } from "expo";
 import AudioPlayer from "react-native-play-audio";
+import {
+  audioPlaying,
+  audioTime,
+  audioError,
+  audioPaused,
+  audioSetTime,
+  audioCurrentTime
+} from "../actions";
 const { Path } = Svg;
 
 const { width: viewportWidth } = Dimensions.get("window");
@@ -141,8 +150,28 @@ class CustomAudioPlayer extends React.Component {
     );
   }
 }
+const mapStateToProps = state => {
+  return {
+    totalTime: state.audio.totalTime,
+    isPlaying: state.audio.isPlaying,
+    isPaused: state.audio.isPaused,
+    setTime: state.audio.setTime,
+    currentTime: state.audio.currentTime,
+    error: state.audio.error
+  };
+};
 
-export default CustomAudioPlayer;
+export default connect(
+  mapStateToProps,
+  {
+    audioPlaying,
+    audioTime,
+    audioError,
+    audioPaused,
+    audioSetTime,
+    audioCurrentTime
+  }
+)(CustomAudioPlayer);
 
 const entryBorderRadius = 6;
 

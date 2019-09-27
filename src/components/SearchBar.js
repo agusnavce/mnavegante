@@ -18,6 +18,7 @@ export default class SearchBar extends Component {
           placeholderTextColor={"#999"}
           underlineColorAndroid={"#fff"}
           autoCorrect={false}
+          onChangeText={this.props.onChangeText}
         />
       </View>
     );

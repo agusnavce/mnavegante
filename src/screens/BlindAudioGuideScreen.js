@@ -24,12 +24,12 @@ export default class BlindAudioGuide extends React.Component {
           {"Bienvenido al recorrido a ciegas!"}
         </Text>
         <Text style={styles.text2Style}>
-          {"Usted está escuchando audio de "}
-        </Text>
-        <Text style={styles.text2Style}>
           {
             "A medida que avance en la muestra se le desplegaran los audios de las obras"
           }
+        </Text>
+        <Text style={styles.text2Style}>
+          {"Usted está escuchando audio de "}
         </Text>
       </View>
     );
@@ -39,7 +39,8 @@ export default class BlindAudioGuide extends React.Component {
 const styles = StyleSheet.create({
   viewStyle: {
     flex: 1,
-    display: "flex"
+    display: "flex",
+    justifyContent: "center"
   },
   textStyle: {
     fontWeight: "bold",
@@ -49,6 +50,7 @@ const styles = StyleSheet.create({
     marginTop: "10%"
   },
   text2Style: {
+    marginTop: 10,
     fontSize: 18,
     color: "white",
     fontWeight: "bold",

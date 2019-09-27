@@ -21,10 +21,10 @@ const itemHorizontalMargin = wp(2);
 export const sliderWidth = viewportWidth;
 export const itemWidth = slideWidth;
 
-var CardItem = ({ data: { illustration, title, subtitle, id = 1 }, props }) => {
-  const uppercaseTitle = title ? (
+var CardItem = ({ data: { image_url, location_name, piece_id }, props }) => {
+  const uppercaseTitle = location_name ? (
     <Text style={styles.title} numberOfLines={2}>
-      {title.toUpperCase()}
+      {location_name.toUpperCase()}
     </Text>
   ) : (
     false
@@ -42,16 +42,11 @@ var CardItem = ({ data: { illustration, title, subtitle, id = 1 }, props }) => {
       <View style={styles.textContainer}>
         <Image
           source={{
-            uri: illustration
+            uri: image_url
           }}
           style={styles.image}
         />
-        <View style={styles.titleContainer}>
-          {uppercaseTitle}
-          <Text style={styles.subtitle} numberOfLines={2}>
-            {subtitle}
-          </Text>
-        </View>
+        <View style={styles.titleContainer}>{uppercaseTitle}</View>
       </View>
     </TouchableOpacity>
   );
